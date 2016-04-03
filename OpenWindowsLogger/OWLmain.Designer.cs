@@ -66,6 +66,7 @@
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "OWLmain";
       this.Text = "OWL";
+      this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OWLmain_FormClosed);
       this.Load += new System.EventHandler(this.OWLmain_Load);
       this.ResumeLayout(false);
       this.PerformLayout();

@@ -15,8 +15,8 @@ namespace OpenWindowsLogger
   public partial class OWLmain : Form
   {
     public static bool logEnabled = false;
-    public static string logPath = Environment.CurrentDirectory + "\\"+ DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
-    StreamWriter logFilew = new StreamWriter(logPath);
+    public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
+    public static logger log = new logger();
 
     public OWLmain()
     {
@@ -25,12 +25,21 @@ namespace OpenWindowsLogger
 
     private void OWLmain_Load(object sender, EventArgs e)
     {
+      //set logpath and create log file if it doesnt exist
       txtLogPath.Text = logPath;
       if (!File.Exists(logPath)) { File.CreateText(logPath); }
+      
+      //start a thread for watching mouseclicks
+      new Thread(() =>
+      {
+        mouseListener.mouseListenerMain();
+      }).Start();
+
     }
-    
+
     private void logWindows()
     {
+      //Thread will log open windows
       new Thread(() =>
       {
         Thread.CurrentThread.IsBackground = true;
@@ -38,46 +47,39 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
-          rwlog("w", "[" + DateTime.Now + "]" + "/" + handle + "/" + title);
+          log.rwlog("w", "[" + DateTime.Now + "]" + "/" + handle + "/" + title);
         }
+
         if (!logEnabled) { return; } else { logWindows(); }
       }).Start();
+
     }
 
     private void btnEnableLogging_Click(object sender, EventArgs e)
     {
+      //if logging is already enabled then disable
       if (logEnabled)
       {
         logEnabled = false;
         btnEnableLogging.Text = "Logging Disabled";
         btnEnableLogging.ForeColor = Color.Red;
-        rwlog("w", "Logging Disabled - " + DateTime.Now);
+        log.rwlog("w", "Logging Disabled - " + DateTime.Now);
       }
+      //otherwise, enable
       else if (!logEnabled)
       {
         logEnabled = true;
         btnEnableLogging.Text = "Logging Enabled";
         btnEnableLogging.ForeColor = Color.Green;
-        rwlog("w", "Logging Enabled - " + DateTime.Now);
+        log.rwlog("w", "Logging Enabled - " + DateTime.Now);
         logWindows();
       }
     }
 
-    private void rwlog(string rw, string contents)
+    private void OWLmain_FormClosed(object sender, FormClosedEventArgs e)
     {
-
-      if (rw == "w")
-      {
-        logFilew.WriteLine(contents);
-        logFilew.Flush();
-      }
-
-      if (rw == "r")
-      {
-        //scrapped feature, live log, will redo
-      }
+      //when the form closes stop all threads and exit app
+      Application.Exit();
     }
-
-   
   }
 }

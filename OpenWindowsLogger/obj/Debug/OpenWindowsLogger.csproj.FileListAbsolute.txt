@@ -7,3 +7,4 @@ c:\users\andrew\documents\visual studio 2015\Projects\OpenWindowsLogger\OpenWind
 c:\users\andrew\documents\visual studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.exe
 c:\users\andrew\documents\visual studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.pdb
 c:\users\andrew\documents\visual studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.OWLmain.resources
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\Gma.System.MouseKeyHook.dll

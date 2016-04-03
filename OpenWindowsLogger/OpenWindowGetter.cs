@@ -8,7 +8,6 @@ namespace OpenWindowsLogger
 {
   using System.Runtime.InteropServices;
   using HWND = IntPtr;
-
   /// <summary>Contains functionality to get all the open windows.</summary>
   /// CREDIT: http://www.tcx.be/blog/2006/list-open-windows/ 2006, May 20
   public static class OpenWindowGetter
