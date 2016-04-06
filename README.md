@@ -10,6 +10,8 @@ Monitor time between pressing button in application and new form opening;
   4. Turn off logging
   5. Check log for time between click of button, and first instance of window
 
+Current Version: [Download](https://github.com/weeandykidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/app.publish/OpenWindowsLogger.exe)
+
 UI:
 
 ![alt tag](http://i.imgur.com/QgjCy6J.png)
