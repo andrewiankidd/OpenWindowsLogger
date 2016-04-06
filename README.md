@@ -11,7 +11,7 @@ monitor time between pressing button in application and new form opening;
 
 UI:
 
-![alt tag](http://i.imgur.com/AAlBlhf.png)
+![alt tag](http://i.imgur.com/QgjCy6J.png)
 
 Output:
 
