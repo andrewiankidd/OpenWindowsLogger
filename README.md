@@ -11,8 +11,13 @@ monitor time between pressing button in application and new form opening;
 
 UI:
 
-![alt tag](http://i.imgur.com/9aAMDHr.png)
+![alt tag](http://i.imgur.com/AAlBlhf.png)
 
 Output:
 
 ![alt tag](http://i.imgur.com/0mCbdYP.png)
+
+
+
+
+Icon made by Freepik from www.flaticon.com 
