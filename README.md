@@ -1,4 +1,5 @@
-# OpenWindowsLogger
+#OpenWindowsLogger ![](http://i.imgur.com/9mZAHsZ.png)
+
 A tool to log all open windows and mouseclicks continuously
 
 example use case:
