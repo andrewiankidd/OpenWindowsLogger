@@ -13,6 +13,8 @@ Monitor time between pressing button in application and new form opening;
 **Current Version:**
 [Download](https://github.com/weeandykidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/app.publish/OpenWindowsLogger.exe)
 
+##Screenshots
+
 **UI:**
 
 ![alt tag](http://i.imgur.com/QgjCy6J.png)
