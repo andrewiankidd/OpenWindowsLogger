@@ -1,0 +1,6 @@
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Release\OpenWindowsLogger.exe.config
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Release\OpenWindowsLogger.OWLmain.resources
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Release\OpenWindowsLogger.Properties.Resources.resources
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Release\OpenWindowsLogger.csproj.GenerateResource.Cache
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Release\OpenWindowsLogger.exe
+C:\Users\Andrew\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Release\OpenWindowsLogger.pdb
