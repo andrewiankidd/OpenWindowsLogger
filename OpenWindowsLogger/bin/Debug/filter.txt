@@ -1,0 +1,5 @@
+OWL
+OpenWindowsLogger (Running) - Microsoft Visual Studio
+Windows Shell Experience Host
+NVIDIA GeForce Overlay
+NVIDIA GeForce Overlay DT

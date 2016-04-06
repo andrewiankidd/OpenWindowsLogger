@@ -15,8 +15,8 @@ namespace OpenWindowsLogger
   public partial class OWLmain : Form
   {
     public static bool logEnabled = false;
-    public static bool filterExisting = true;
     public static List<string> existingWindows = new List<string>();
+    public static List<string> filteredWindows = new List<string>();
     public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
     public static logger log = new logger();
 
@@ -30,6 +30,12 @@ namespace OpenWindowsLogger
       //set logpath and create log file if it doesnt exist
       txtLogPath.Text = logPath;
       if (!File.Exists(logPath)) { File.CreateText(logPath); }
+
+      //check for filter list and read into filteredWindows list
+      if (File.Exists(Environment.CurrentDirectory + "\\filter.txt"))
+      {
+         filteredWindows = new List<string>(File.ReadAllLines(Environment.CurrentDirectory + "\\filter.txt"));
+      }
 
       //start a thread for watching mouseclicks
       new Thread(() =>
@@ -51,8 +57,12 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
-          //if user has chosen to filter the existing windows, check current iteration result against list of known windows
-          if (filterExisting && existingWindows.Contains("/" + handle + "/" + title))
+          //if user has chosen to filter the existing windows, check current iteration result against list of known windows to ignore
+          if (chkFilterExisting.Checked && existingWindows.Contains("/" + handle + "/" + title))
+          {
+            //it's on the filter list, so ignore it
+          }
+          else if (chkExtFilterList.Checked && filteredWindows.Contains(title))
           {
             //it's on the filter list, so ignore it
           }
@@ -87,7 +97,7 @@ namespace OpenWindowsLogger
     private void btnEnableLogging_Click(object sender, EventArgs e)
     {
       //if user wants to filter existing windows, run getExistingWindows, which will create list of running windows we can compare against later
-      if (filterExisting) { getExistingWindows(); }
+      if (chkFilterExisting.Checked) { getExistingWindows(); }
       
       //if logging is already enabled then disable
       if (logEnabled)
@@ -97,6 +107,8 @@ namespace OpenWindowsLogger
         btnEnableLogging.ForeColor = Color.Red;
         //write to log that logging has been disabled, and the datetime it was disabled
         log.rwlog("w", "Logging Disabled - " + DateTime.Now);
+        //if user has chosen to automatically open the log file, open it in default text editor now
+        if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
       }
       //otherwise, enable
       else if (!logEnabled)
@@ -114,14 +126,6 @@ namespace OpenWindowsLogger
     {
       //when the form closes stop all threads and exit app
       Application.Exit();
-    }
-
-    private void chkFilterExisting_CheckedChanged(object sender, EventArgs e)
-    {
-      if (chkFilterExisting.Checked)
-      { filterExisting = true; }
-      else
-      { filterExisting = false; }
     }
   }
 }

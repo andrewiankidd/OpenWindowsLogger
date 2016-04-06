@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OpenWindowsLogger.exe" size="486848">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OpenWindowsLogger.exe" size="487360">
       <assemblyIdentity name="OpenWindowsLogger" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5MhcPz3dYcVND+pAp3oxicUmhb3f6gubTEZz3qlzA9c=</dsig:DigestValue>
+        <dsig:DigestValue>IoSyu4Q60+SJi+JYA/iGMPTajyTMxevg7i1nTqYl7SU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -32,7 +32,8 @@
       this.txtLogPath = new System.Windows.Forms.TextBox();
       this.btnEnableLogging = new System.Windows.Forms.Button();
       this.chkFilterExisting = new System.Windows.Forms.CheckBox();
-      this.chkFilterList = new System.Windows.Forms.CheckBox();
+      this.chkExtFilterList = new System.Windows.Forms.CheckBox();
+      this.chkAutoOpenLog = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // txtLogPath
@@ -69,25 +70,38 @@
       this.chkFilterExisting.TabIndex = 3;
       this.chkFilterExisting.Text = "Filter Existing Windows";
       this.chkFilterExisting.UseVisualStyleBackColor = true;
-      this.chkFilterExisting.CheckedChanged += new System.EventHandler(this.chkFilterExisting_CheckedChanged);
       // 
-      // chkFilterList
+      // chkExtFilterList
       // 
-      this.chkFilterList.AutoSize = true;
-      this.chkFilterList.Location = new System.Drawing.Point(153, 36);
-      this.chkFilterList.Name = "chkFilterList";
-      this.chkFilterList.Size = new System.Drawing.Size(108, 17);
-      this.chkFilterList.TabIndex = 4;
-      this.chkFilterList.Text = "External Filter List";
-      this.chkFilterList.UseVisualStyleBackColor = true;
-      this.chkFilterList.Visible = false;
+      this.chkExtFilterList.AutoSize = true;
+      this.chkExtFilterList.Checked = true;
+      this.chkExtFilterList.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chkExtFilterList.Location = new System.Drawing.Point(153, 36);
+      this.chkExtFilterList.Name = "chkExtFilterList";
+      this.chkExtFilterList.Size = new System.Drawing.Size(108, 17);
+      this.chkExtFilterList.TabIndex = 4;
+      this.chkExtFilterList.Text = "External Filter List";
+      this.chkExtFilterList.UseVisualStyleBackColor = true;
+      // 
+      // chkAutoOpenLog
+      // 
+      this.chkAutoOpenLog.AutoSize = true;
+      this.chkAutoOpenLog.Checked = true;
+      this.chkAutoOpenLog.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chkAutoOpenLog.Location = new System.Drawing.Point(268, 36);
+      this.chkAutoOpenLog.Name = "chkAutoOpenLog";
+      this.chkAutoOpenLog.Size = new System.Drawing.Size(92, 17);
+      this.chkAutoOpenLog.TabIndex = 5;
+      this.chkAutoOpenLog.Text = "AutoOpenLog";
+      this.chkAutoOpenLog.UseVisualStyleBackColor = true;
       // 
       // OWLmain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(752, 88);
-      this.Controls.Add(this.chkFilterList);
+      this.Controls.Add(this.chkAutoOpenLog);
+      this.Controls.Add(this.chkExtFilterList);
       this.Controls.Add(this.chkFilterExisting);
       this.Controls.Add(this.btnEnableLogging);
       this.Controls.Add(this.txtLogPath);
@@ -109,7 +123,8 @@
     private System.Windows.Forms.TextBox txtLogPath;
     private System.Windows.Forms.Button btnEnableLogging;
     private System.Windows.Forms.CheckBox chkFilterExisting;
-    private System.Windows.Forms.CheckBox chkFilterList;
+    private System.Windows.Forms.CheckBox chkExtFilterList;
+    private System.Windows.Forms.CheckBox chkAutoOpenLog;
   }
 }
 
