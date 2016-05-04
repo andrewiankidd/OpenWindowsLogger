@@ -11,10 +11,10 @@ Monitor time between pressing button in application and new form opening;
   5. Check log for time between click of button, and first instance of window
 
 **Current Version:**
-[Download](https://github.com/weeandykidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/app.publish/OpenWindowsLogger.exe)
+[Download](https://github.com/andrewiankidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/app.publish/OpenWindowsLogger.exe)
 
 **User Guide:**
-[Wiki](https://github.com/weeandykidd/OpenWindowsLogger/wiki)
+[Wiki](https://github.com/andrewiankidd/OpenWindowsLogger/wiki)
 
 ##Screenshots
 
