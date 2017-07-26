@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OpenWindowsLogger.exe" size="487360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OpenWindowsLogger.exe" size="486912">
       <assemblyIdentity name="OpenWindowsLogger" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IoSyu4Q60+SJi+JYA/iGMPTajyTMxevg7i1nTqYl7SU=</dsig:DigestValue>
+        <dsig:DigestValue>YuOMYdaRvE355bU5V4d4inEnKH3AXOwKpWoYLvsy3Zg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -75,13 +75,13 @@
       <dsig:DigestValue>ooLTcA5lzcMCXogvXAiXgyOY+XHB3e7x1pjxp3cW+dU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="OpenWindowsLogger.exe.config" size="189">
+  <file name="OpenWindowsLogger.exe.config" size="184">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>6N7MliNbVJSIAIPrecIshMbZ7zEoKLr5SQvud4LDUOw=</dsig:DigestValue>
+      <dsig:DigestValue>jWVCngsqgsEdPtxOoE7SAK7f6h1++LmE6IqOl8/1R3A=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

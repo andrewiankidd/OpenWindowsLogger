@@ -34,6 +34,7 @@
       this.chkFilterExisting = new System.Windows.Forms.CheckBox();
       this.chkExtFilterList = new System.Windows.Forms.CheckBox();
       this.chkAutoOpenLog = new System.Windows.Forms.CheckBox();
+      this.chkSuppressDupes = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // txtLogPath
@@ -95,11 +96,24 @@
       this.chkAutoOpenLog.Text = "AutoOpenLog";
       this.chkAutoOpenLog.UseVisualStyleBackColor = true;
       // 
+      // chkSuppressDupes
+      // 
+      this.chkSuppressDupes.AutoSize = true;
+      this.chkSuppressDupes.Checked = true;
+      this.chkSuppressDupes.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chkSuppressDupes.Location = new System.Drawing.Point(366, 36);
+      this.chkSuppressDupes.Name = "chkSuppressDupes";
+      this.chkSuppressDupes.Size = new System.Drawing.Size(123, 17);
+      this.chkSuppressDupes.TabIndex = 6;
+      this.chkSuppressDupes.Text = "Suppress Duplicates";
+      this.chkSuppressDupes.UseVisualStyleBackColor = true;
+      // 
       // OWLmain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(752, 88);
+      this.Controls.Add(this.chkSuppressDupes);
       this.Controls.Add(this.chkAutoOpenLog);
       this.Controls.Add(this.chkExtFilterList);
       this.Controls.Add(this.chkFilterExisting);
@@ -125,6 +139,7 @@
     private System.Windows.Forms.CheckBox chkFilterExisting;
     private System.Windows.Forms.CheckBox chkExtFilterList;
     private System.Windows.Forms.CheckBox chkAutoOpenLog;
+    private System.Windows.Forms.CheckBox chkSuppressDupes;
   }
 }
 

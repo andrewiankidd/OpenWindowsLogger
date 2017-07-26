@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Globalization;
 
 namespace OpenWindowsLogger
 {
@@ -57,17 +58,28 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
+          string windowKey = "/" + handle + "/" + title;
+
           //if user has chosen to filter the existing windows, check current iteration result against list of known windows to ignore
-          if (chkFilterExisting.Checked && existingWindows.Contains("/" + handle + "/" + title))
+          if (chkFilterExisting.Checked && existingWindows.Contains(windowKey))
           {
-            //it's on the filter list, so ignore it
+            //it's on the existing window list, so ignore it
           }
-          else if (chkExtFilterList.Checked && filteredWindows.Contains(title))
+          else if (chkExtFilterList.Checked && filteredWindows.Contains(title) || chkExtFilterList.Checked && filteredWindows.Contains(windowKey))
           {
             //it's on the filter list, so ignore it
           }
           //it's not on the filter list, so print it to log
-          else { log.rwlog("w", "[" + DateTime.Now + "]" + "/" + handle + "/" + title); }
+          else {
+            
+            //if we wanna suppress dupes then add this entry to the filter before printing it out, it'll be ignored next time
+            if (chkSuppressDupes.Checked)
+            {
+              filteredWindows.Add(windowKey);
+            }
+
+            log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + windowKey);
+          }
         }
         //check if logging is still enabled, if not then close off, if so then run logger again
         if (!logEnabled) { return; } else { logWindows(); }
@@ -87,8 +99,9 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
+          string windowKey = "/" + handle + "/" + title;
           //add window key and title to list of existing windows
-          existingWindows.Add("/" + handle + "/" + title);
+          existingWindows.Add(windowKey);
         }
       }).Start();
 
@@ -106,7 +119,7 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Disabled";
         btnEnableLogging.ForeColor = Color.Red;
         //write to log that logging has been disabled, and the datetime it was disabled
-        log.rwlog("w", "Logging Disabled - " + DateTime.Now);
+        log.rwlog("w", "Logging Disabled - " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
         //if user has chosen to automatically open the log file, open it in default text editor now
         if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
       }
@@ -117,7 +130,7 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Enabled";
         btnEnableLogging.ForeColor = Color.Green;
         //write to log that logging has been enabled, and the datetime it was enabled
-        log.rwlog("w", "Logging Enabled - " + DateTime.Now);
+        log.rwlog("w", "Logging Enabled - " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
         logWindows();
       }
     }
@@ -127,5 +140,6 @@ namespace OpenWindowsLogger
       //when the form closes stop all threads and exit app
       Application.Exit();
     }
+
   }
 }
