@@ -17,7 +17,7 @@ Monitor time between pressing button in application and new form opening;
 **User Guide:**
 [Wiki](https://github.com/andrewiankidd/OpenWindowsLogger/wiki)
 
-##Screenshots
+## Screenshots
 
 **UI:**
 
@@ -28,7 +28,7 @@ Monitor time between pressing button in application and new form opening;
 ![alt tag](http://i.imgur.com/aE8XYlc.png)
 
 
-##Credits
+## Credits
 
 [Icon made by Freepik from www.flaticon.com](http://www.flaticon.com/authors/freepik)            
 [Mouse Listener](https://blogs.msdn.microsoft.com/toub/2006/05/03/low-level-mouse-hook-in-c/)          
