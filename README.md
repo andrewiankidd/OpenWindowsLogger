@@ -1,4 +1,4 @@
-#OpenWindowsLogger ![](http://i.imgur.com/9mZAHsZ.png)
+# OpenWindowsLogger ![](http://i.imgur.com/9mZAHsZ.png)
 
 A tool to log all open windows and mouseclicks continuously
 
@@ -11,7 +11,8 @@ Monitor time between pressing button in application and new form opening;
   5. Check log for time between click of button, and first instance of window
 
 **Current Version:**
-[Download](https://github.com/andrewiankidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/app.publish/OpenWindowsLogger.exe)
+[OpenWindowsLogger](https://github.com/andrewiankidd/OpenWindowsLogger/raw/master/OpenWindowsLogger/bin/Debug/OpenWindowsLogger.exe)
+[MouseHook](https://github.com/andrewiankidd/OpenWindowsLogger/blob/master/OpenWindowsLogger/bin/Debug/Gma.System.MouseKeyHook.dll)
 
 **User Guide:**
 [Wiki](https://github.com/andrewiankidd/OpenWindowsLogger/wiki)
@@ -20,11 +21,11 @@ Monitor time between pressing button in application and new form opening;
 
 **UI:**
 
-![alt tag](http://i.imgur.com/QgjCy6J.png)
+![alt tag](http://i.imgur.com/sNOprCA.png)
 
 **Output:**
 
-![alt tag](http://i.imgur.com/mQlORM6.png)
+![alt tag](http://i.imgur.com/aE8XYlc.png)
 
 
 ##Credits
