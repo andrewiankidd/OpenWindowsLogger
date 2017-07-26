@@ -26,10 +26,6 @@ C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindo
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.OWLmain.resources
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.Properties.Resources.resources
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.csproj.GenerateResource.Cache
-C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\OpenWindowsLogger.exe.manifest
-C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\OpenWindowsLogger.application
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\OpenWindowsLogger.exe
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\OpenWindowsLogger.pdb
 C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\bin\Debug\Gma.System.MouseKeyHook.dll
-C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.exe.manifest
-C:\Users\akidd\Documents\Visual Studio 2015\Projects\OpenWindowsLogger\OpenWindowsLogger\obj\Debug\OpenWindowsLogger.application

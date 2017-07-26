@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Globalization;
+using System.Timers;
 
 namespace OpenWindowsLogger
 {
@@ -18,13 +19,15 @@ namespace OpenWindowsLogger
     public static bool logEnabled = false;
     public static List<string> existingWindows = new List<string>();
     public static List<string> filteredWindows = new List<string>();
+    public static int timeoutLimit = 0;
     public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
-    public static logger log = new logger();
+    public static logger log;
 
     public OWLmain()
     {
       InitializeComponent();
-    }
+      log = new logger();
+  }
 
     private void OWLmain_Load(object sender, EventArgs e)
     {
@@ -44,6 +47,21 @@ namespace OpenWindowsLogger
         mouseListener.mouseListenerMain();
       }).Start();
 
+      if (timeoutLimit > 0)
+      {
+        System.Timers.Timer timer = new System.Timers.Timer(timeoutLimit * 1000);
+        timer.Elapsed += Timer_Elapsed;
+        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + " Logging for " + timeoutLimit + " seconds.");
+        toggleLogging();
+        timer.Start();
+      }
+
+    }
+
+    private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+      log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + " Timer up!");
+      Application.Exit();
     }
 
     private void logWindows()
@@ -107,11 +125,11 @@ namespace OpenWindowsLogger
 
     }
 
-    private void btnEnableLogging_Click(object sender, EventArgs e)
+    private void toggleLogging()
     {
       //if user wants to filter existing windows, run getExistingWindows, which will create list of running windows we can compare against later
       if (chkFilterExisting.Checked) { getExistingWindows(); }
-      
+
       //if logging is already enabled then disable
       if (logEnabled)
       {
@@ -119,7 +137,7 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Disabled";
         btnEnableLogging.ForeColor = Color.Red;
         //write to log that logging has been disabled, and the datetime it was disabled
-        log.rwlog("w", "Logging Disabled - " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + btnEnableLogging.Text);
         //if user has chosen to automatically open the log file, open it in default text editor now
         if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
       }
@@ -130,9 +148,14 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Enabled";
         btnEnableLogging.ForeColor = Color.Green;
         //write to log that logging has been enabled, and the datetime it was enabled
-        log.rwlog("w", "Logging Enabled - " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + btnEnableLogging.Text);
         logWindows();
       }
+    }
+
+    private void btnEnableLogging_Click(object sender, EventArgs e)
+    {
+      toggleLogging();
     }
 
     private void OWLmain_FormClosed(object sender, FormClosedEventArgs e)
