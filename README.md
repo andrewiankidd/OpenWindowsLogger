@@ -1,6 +1,8 @@
 # OpenWindowsLogger ![](http://i.imgur.com/9mZAHsZ.png)
 
-A tool to log all open windows and mouseclicks continuously
+A tool to log all open windows, keypresses and mouseclicks continuously
+
+Not considered a keylogger because it doesn't run in the background :)
 
 **Example use case:**      
 Monitor time between pressing button in application and new form opening;
