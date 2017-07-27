@@ -1,7 +1,7 @@
 ﻿using OpenWindowsLogger;
 using System;
 using System.Diagnostics;
-using System.Globalization;
+using System.Windows.Automation;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -54,10 +54,17 @@ class mouseListener
       MSLLHOOKSTRUCT hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
 
       string mButton = MouseMessages.WM_LBUTTONDOWN == (MouseMessages)wParam ? "LEFT" : "RIGHT";
+      AutomationElement el = AutomationElement.FromPoint(new System.Windows.Point(hookStruct.pt.x, hookStruct.pt.y));
+      string winName = "";
+      if (el.Current.Name.Length>0)
+      {
+        winName = ", " + el.Current.Name;
+      }
+
 
       //check if logging enabled and if so then write to log and console
       if (OpenWindowsLogger.OWLmain.logEnabled) {
-        OpenWindowsLogger.OWLmain.log.rwlog("w", "CLICKED/" + mButton + "/" + hookStruct.pt.x + ", " + hookStruct.pt.y, OWLmain.HTMLout);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "MOUSECLICK/" + mButton + "/" + hookStruct.pt.x + ", " + hookStruct.pt.y + winName, OWLmain.HTMLout);
       }
     }
 
