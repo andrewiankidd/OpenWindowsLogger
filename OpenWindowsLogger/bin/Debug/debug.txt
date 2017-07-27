@@ -1,4 +1,5 @@
-[2017-07-27 11:00:24.420] - Logging for 60 seconds.
-[2017-07-27 11:00:24.421] - Logging Enabled
-[2017-07-27 11:00:25.612] - /CLICKED/LEFT/1302, 512
-[2017-07-27 11:00:25.758] - Logging Disabled
+[2017-07-27 11:21:56.375] - Logging for 60 seconds.
+[2017-07-27 11:21:56.379] - <table>
+[2017-07-27 11:21:56.379] - <tr><td>Timestamp</td><td>Event</td><td>Details</td><td>Details</td></tr>
+<tr><td>Logging Enabled</td></tr>
+<tr><td></td><td>CLICKED</td><td>LEFT</td><td>1315, 478</td></tr>

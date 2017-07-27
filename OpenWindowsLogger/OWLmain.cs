@@ -22,6 +22,7 @@ namespace OpenWindowsLogger
     public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
     public static logger log;
     private static GlobalKeyboardHook keyListener = new GlobalKeyboardHook();
+    public static bool HTMLout = false;
 
 
     public OWLmain()
@@ -55,7 +56,6 @@ namespace OpenWindowsLogger
       {
         System.Timers.Timer timer = new System.Timers.Timer(timeoutLimit * 1000);
         timer.Elapsed += Timer_Elapsed;
-        log.rwlog("w", "Logging for " + timeoutLimit + " seconds.");
         toggleLogging();
         timer.Start();
       }
@@ -64,7 +64,7 @@ namespace OpenWindowsLogger
 
     private void Timer_Elapsed(object sender, ElapsedEventArgs e)
     {
-      log.rwlog("w", "Timer up!");
+      log.rwlog("w", "TIMER/COMPLETE/" + timeoutLimit + " seconds.", HTMLout);
       Application.Exit();
     }
 
@@ -80,7 +80,7 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
-          string windowKey = "/" + handle + "/" + title;
+          string windowKey = handle + "/" + title;
 
           //if user has chosen to filter the existing windows, check current iteration result against list of known windows to ignore
           if (chkFilterExisting.Checked && existingWindows.Contains(windowKey))
@@ -100,7 +100,7 @@ namespace OpenWindowsLogger
               filteredWindows.Add(windowKey);
             }
 
-            log.rwlog("w", windowKey);
+            log.rwlog("w", "WINDOW/"+windowKey, HTMLout);
           }
         }
         //check if logging is still enabled, if not then close off, if so then run logger again
@@ -121,7 +121,7 @@ namespace OpenWindowsLogger
         {
           IntPtr handle = window.Key;
           string title = window.Value;
-          string windowKey = "/" + handle + "/" + title;
+          string windowKey = handle + "/" + title;
           //add window key and title to list of existing windows
           existingWindows.Add(windowKey);
         }
@@ -133,6 +133,7 @@ namespace OpenWindowsLogger
     {
       //if user wants to filter existing windows, run getExistingWindows, which will create list of running windows we can compare against later
       if (chkFilterExisting.Checked) { getExistingWindows(); }
+      if (chkHTMLOut.Checked) { HTMLout = true; }
 
       //if logging is already enabled then disable
       if (logEnabled)
@@ -141,7 +142,11 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Disabled";
         btnEnableLogging.ForeColor = Color.Red;
         //write to log that logging has been disabled, and the datetime it was disabled
-        log.rwlog("w", btnEnableLogging.Text);
+        log.rwlog("w", "LOGGING/DISABLED", HTMLout);
+        if (HTMLout)
+        {
+          log.rwlog("raw", "</table>", HTMLout);
+        }     
         //if user has chosen to automatically open the log file, open it in default text editor now
         if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
       }
@@ -152,7 +157,16 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Enabled";
         btnEnableLogging.ForeColor = Color.Green;
         //write to log that logging has been enabled, and the datetime it was enabled
-        log.rwlog("w", btnEnableLogging.Text);
+        if (HTMLout)
+        {
+          log.rwlog("raw", "<table>", HTMLout);
+          log.rwlog("raw", "<tr><td>Timestamp</td><td>Action</td><td>Event</td><td>Details</td></tr>", HTMLout);
+        }
+        if (timeoutLimit > 0)
+        {
+          log.rwlog("w", "TIMER/STARTED/" + timeoutLimit + " seconds.", HTMLout);
+        }
+        log.rwlog("w", "LOGGING/ENABLED", HTMLout);
         logWindows();
       }
     }

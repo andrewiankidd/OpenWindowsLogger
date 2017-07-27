@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenWindowsLogger;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -56,12 +57,7 @@ class mouseListener
 
       //check if logging enabled and if so then write to log and console
       if (OpenWindowsLogger.OWLmain.logEnabled) {
-        OpenWindowsLogger.OWLmain.log.rwlog("w", "/CLICKED/" + mButton + "/" + hookStruct.pt.x + ", " + hookStruct.pt.y);
-        Console.WriteLine("LOGGED: " + hookStruct.pt.x + ", " + hookStruct.pt.y);
-      }
-      else
-      {
-        Console.WriteLine("NOTLOGGED: " + hookStruct.pt.x + ", " + hookStruct.pt.y);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "CLICKED/" + mButton + "/" + hookStruct.pt.x + ", " + hookStruct.pt.y, OWLmain.HTMLout);
       }
     }
 

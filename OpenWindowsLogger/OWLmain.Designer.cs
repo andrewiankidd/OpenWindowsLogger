@@ -37,6 +37,7 @@
       this.chkSuppressDupes = new System.Windows.Forms.CheckBox();
       this.btnLogPath = new System.Windows.Forms.Button();
       this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+      this.chkHTMLOut = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // txtLogPath
@@ -124,11 +125,24 @@
       // 
       this.saveFileDialog.Title = "Choose Log Path";
       // 
+      // chkHTMLOut
+      // 
+      this.chkHTMLOut.AutoSize = true;
+      this.chkHTMLOut.Checked = true;
+      this.chkHTMLOut.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chkHTMLOut.Location = new System.Drawing.Point(495, 36);
+      this.chkHTMLOut.Name = "chkHTMLOut";
+      this.chkHTMLOut.Size = new System.Drawing.Size(91, 17);
+      this.chkHTMLOut.TabIndex = 8;
+      this.chkHTMLOut.Text = "HTML Output";
+      this.chkHTMLOut.UseVisualStyleBackColor = true;
+      // 
       // OWLmain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(752, 88);
+      this.Controls.Add(this.chkHTMLOut);
       this.Controls.Add(this.btnLogPath);
       this.Controls.Add(this.chkSuppressDupes);
       this.Controls.Add(this.chkAutoOpenLog);
@@ -159,6 +173,7 @@
     private System.Windows.Forms.CheckBox chkSuppressDupes;
     private System.Windows.Forms.Button btnLogPath;
     private System.Windows.Forms.SaveFileDialog saveFileDialog;
+    private System.Windows.Forms.CheckBox chkHTMLOut;
   }
 }
 
