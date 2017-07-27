@@ -168,5 +168,19 @@ namespace OpenWindowsLogger
       Application.Exit();
     }
 
+    private void btnLogPath_Click(object sender, EventArgs e)
+    {
+      if (logEnabled) { toggleLogging(); }
+      saveFileDialog.FileName = "OWL.txt";
+      saveFileDialog.DefaultExt = "txt";
+      saveFileDialog.AddExtension = true;
+      saveFileDialog.Filter = "Text File | *.txt";
+      if (saveFileDialog.ShowDialog() == DialogResult.OK)
+      {
+        logPath = saveFileDialog.FileName;
+        txtLogPath.Text = logPath;
+        log = new logger();
+      }
+    }
   }
 }

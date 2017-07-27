@@ -35,6 +35,8 @@
       this.chkExtFilterList = new System.Windows.Forms.CheckBox();
       this.chkAutoOpenLog = new System.Windows.Forms.CheckBox();
       this.chkSuppressDupes = new System.Windows.Forms.CheckBox();
+      this.btnLogPath = new System.Windows.Forms.Button();
+      this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
       this.SuspendLayout();
       // 
       // txtLogPath
@@ -44,7 +46,7 @@
       this.txtLogPath.Enabled = false;
       this.txtLogPath.Location = new System.Drawing.Point(13, 13);
       this.txtLogPath.Name = "txtLogPath";
-      this.txtLogPath.Size = new System.Drawing.Size(727, 20);
+      this.txtLogPath.Size = new System.Drawing.Size(681, 20);
       this.txtLogPath.TabIndex = 0;
       // 
       // btnEnableLogging
@@ -108,11 +110,26 @@
       this.chkSuppressDupes.Text = "Suppress Duplicates";
       this.chkSuppressDupes.UseVisualStyleBackColor = true;
       // 
+      // btnLogPath
+      // 
+      this.btnLogPath.Location = new System.Drawing.Point(700, 12);
+      this.btnLogPath.Name = "btnLogPath";
+      this.btnLogPath.Size = new System.Drawing.Size(39, 21);
+      this.btnLogPath.TabIndex = 7;
+      this.btnLogPath.Text = "...";
+      this.btnLogPath.UseVisualStyleBackColor = true;
+      this.btnLogPath.Click += new System.EventHandler(this.btnLogPath_Click);
+      // 
+      // saveFileDialog
+      // 
+      this.saveFileDialog.Title = "Choose Log Path";
+      // 
       // OWLmain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(752, 88);
+      this.Controls.Add(this.btnLogPath);
       this.Controls.Add(this.chkSuppressDupes);
       this.Controls.Add(this.chkAutoOpenLog);
       this.Controls.Add(this.chkExtFilterList);
@@ -140,6 +157,8 @@
     private System.Windows.Forms.CheckBox chkExtFilterList;
     private System.Windows.Forms.CheckBox chkAutoOpenLog;
     private System.Windows.Forms.CheckBox chkSuppressDupes;
+    private System.Windows.Forms.Button btnLogPath;
+    private System.Windows.Forms.SaveFileDialog saveFileDialog;
   }
 }
 
