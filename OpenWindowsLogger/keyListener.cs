@@ -42,7 +42,7 @@ namespace OpenWindowsLogger
 
     private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
     {
-      if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+      if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown && OWLmain.logKeys)
       {
         string key = kc.ConvertToString(e.KeyboardData.VirtualCode);
         //MessageBox.Show(key);

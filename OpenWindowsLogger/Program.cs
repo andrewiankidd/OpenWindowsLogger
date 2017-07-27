@@ -21,11 +21,29 @@ namespace OpenWindowsLogger
               string value = (i+1) >= args.Length ? null : args[i + 1];
               switch (command)
               {     
-                case "/T":
+                case "/T":  //timeout
                   OWLmain.timeoutLimit = Convert.ToInt32(value) ;
                   break;
-                case "/F":
+                case "/L":  //logpath
                   OWLmain.logPath = value;
+                  break;
+                case "/K":  //logkeys?
+                  OWLmain.logKeys = Convert.ToBoolean(value);
+                  break;
+                case "/H":  //HTMLout?
+                  OWLmain.HTMLout = Convert.ToBoolean(value);
+                  break;
+                case "/F":  //filterExisting?
+                  OWLmain.filterExisting = Convert.ToBoolean(value);
+                  break;
+                case "/E":  //filterExternal?
+                  OWLmain.filterExternal = Convert.ToBoolean(value);
+                  break;
+                case "/A":  //autoopenlog?
+                  OWLmain.autoOpenLog = Convert.ToBoolean(value);
+                  break;
+                case "/S":  //suppressdupes?
+                  OWLmain.suppressDupes = Convert.ToBoolean(value);
                   break;
                 default:
                   break;

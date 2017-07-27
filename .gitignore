@@ -46,3 +46,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /OpenWindowsLogger/bin/Debug/20170727095514output.txt
+*.html
+*.txt

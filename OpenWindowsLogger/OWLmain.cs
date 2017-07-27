@@ -15,20 +15,49 @@ namespace OpenWindowsLogger
 {
   public partial class OWLmain : Form
   {
-    public static bool logEnabled = false;
+    
+    private static GlobalKeyboardHook keyListener = new GlobalKeyboardHook();
     public static List<string> existingWindows = new List<string>();
     public static List<string> filteredWindows = new List<string>();
-    public static int timeoutLimit = 0;
-    public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
+    public static bool logEnabled = false;
     public static logger log;
-    private static GlobalKeyboardHook keyListener = new GlobalKeyboardHook();
-    public static bool HTMLout = false;
-
+    public static int timeoutLimit = 0;
+    public static string logPath;
+    public static bool filterExisting = true;
+    public static bool filterExternal = true;
+    public static bool autoOpenLog = true;
+    public static bool suppressDupes = true;
+    public static bool HTMLout = true;
+    public static bool logKeys = true;
 
     public OWLmain()
     {
       InitializeComponent();
+
+      //existing
+      chkFilterExisting.Checked = filterExisting;
+      //external
+      chkExtFilterList.Checked = filterExternal;
+      //autoopen
+      chkAutoOpenLog.Checked = autoOpenLog;
+      //suppressdupes
+      chkSuppressDupes.Checked = suppressDupes;
+      //htmlout
+      chkHTMLOut.Checked = HTMLout;
+      //logkeys
+      chkLogKeys.Checked = logKeys;
+
+      //logging
+      if (String.IsNullOrEmpty(logPath))
+      {
+        if (HTMLout)
+        {
+          logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.html";
+        }
+        else { logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt"; }
+      }
       log = new logger();
+
     }
 
     private void OWLmain_Load(object sender, EventArgs e)
@@ -83,11 +112,11 @@ namespace OpenWindowsLogger
           string windowKey = handle + "/" + title;
 
           //if user has chosen to filter the existing windows, check current iteration result against list of known windows to ignore
-          if (chkFilterExisting.Checked && existingWindows.Contains(windowKey))
+          if (filterExisting && existingWindows.Contains(windowKey))
           {
             //it's on the existing window list, so ignore it
           }
-          else if (chkExtFilterList.Checked && filteredWindows.Contains(title) || chkExtFilterList.Checked && filteredWindows.Contains(windowKey))
+          else if (filterExternal && filteredWindows.Contains(title) || filterExternal && filteredWindows.Contains(windowKey))
           {
             //it's on the filter list, so ignore it
           }
@@ -95,7 +124,7 @@ namespace OpenWindowsLogger
           else {
             
             //if we wanna suppress dupes then add this entry to the filter before printing it out, it'll be ignored next time
-            if (chkSuppressDupes.Checked)
+            if (suppressDupes)
             {
               filteredWindows.Add(windowKey);
             }
@@ -132,8 +161,8 @@ namespace OpenWindowsLogger
     private void toggleLogging()
     {
       //if user wants to filter existing windows, run getExistingWindows, which will create list of running windows we can compare against later
-      if (chkFilterExisting.Checked) { getExistingWindows(); }
-      if (chkHTMLOut.Checked) { HTMLout = true; }
+      if (filterExisting) { getExistingWindows(); }
+      if (HTMLout) { HTMLout = true; }
 
       //if logging is already enabled then disable
       if (logEnabled)
@@ -148,7 +177,7 @@ namespace OpenWindowsLogger
           log.rwlog("raw", "</table>", HTMLout);
         }     
         //if user has chosen to automatically open the log file, open it in default text editor now
-        if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
+        if (autoOpenLog) { System.Diagnostics.Process.Start(logPath); }
       }
       //otherwise, enable
       else if (!logEnabled)
@@ -182,19 +211,62 @@ namespace OpenWindowsLogger
       Application.Exit();
     }
 
+    private void updateLogger(string path)
+    {
+      logPath = path;
+      txtLogPath.Text = path;
+      log = new logger();
+    }
+
     private void btnLogPath_Click(object sender, EventArgs e)
     {
       if (logEnabled) { toggleLogging(); }
-      saveFileDialog.FileName = "OWL.txt";
-      saveFileDialog.DefaultExt = "txt";
+      if (HTMLout) {
+        saveFileDialog.FileName = "OWL.html";
+        saveFileDialog.DefaultExt = "html";
+        saveFileDialog.Filter = "HTML | *.html";
+      }
+      else {
+        saveFileDialog.FileName = "OWL.txt";
+        saveFileDialog.DefaultExt = "txt";       
+        saveFileDialog.Filter = "Text File | *.txt";
+      }
       saveFileDialog.AddExtension = true;
-      saveFileDialog.Filter = "Text File | *.txt";
       if (saveFileDialog.ShowDialog() == DialogResult.OK)
       {
-        logPath = saveFileDialog.FileName;
-        txtLogPath.Text = logPath;
-        log = new logger();
+        updateLogger(saveFileDialog.FileName);
       }
+    }
+
+    private void chkHTMLOut_CheckedChanged(object sender, EventArgs e)
+    {
+      if (logEnabled) { toggleLogging(); }
+      updateLogger(saveFileDialog.FileName);
+    }
+
+    private void chkLogKeys_CheckedChanged(object sender, EventArgs e)
+    {
+      logKeys = chkLogKeys.Checked;
+    }
+
+    private void chkFilterExisting_CheckedChanged(object sender, EventArgs e)
+    {
+      filterExisting = chkFilterExisting.Checked;
+    }
+
+    private void chkExtFilterList_CheckedChanged(object sender, EventArgs e)
+    {
+      filterExternal = chkExtFilterList.Checked;
+    }
+
+    private void chkAutoOpenLog_CheckedChanged(object sender, EventArgs e)
+    {
+      autoOpenLog = chkAutoOpenLog.Checked;
+    }
+
+    private void chkSuppressDupes_CheckedChanged(object sender, EventArgs e)
+    {
+      suppressDupes = chkSuppressDupes.Checked;
     }
   }
 }

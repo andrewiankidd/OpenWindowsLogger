@@ -38,6 +38,7 @@
       this.btnLogPath = new System.Windows.Forms.Button();
       this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
       this.chkHTMLOut = new System.Windows.Forms.CheckBox();
+      this.chkLogKeys = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // txtLogPath
@@ -74,6 +75,7 @@
       this.chkFilterExisting.TabIndex = 3;
       this.chkFilterExisting.Text = "Filter Existing Windows";
       this.chkFilterExisting.UseVisualStyleBackColor = true;
+      this.chkFilterExisting.CheckedChanged += new System.EventHandler(this.chkFilterExisting_CheckedChanged);
       // 
       // chkExtFilterList
       // 
@@ -86,6 +88,7 @@
       this.chkExtFilterList.TabIndex = 4;
       this.chkExtFilterList.Text = "External Filter List";
       this.chkExtFilterList.UseVisualStyleBackColor = true;
+      this.chkExtFilterList.CheckedChanged += new System.EventHandler(this.chkExtFilterList_CheckedChanged);
       // 
       // chkAutoOpenLog
       // 
@@ -98,6 +101,7 @@
       this.chkAutoOpenLog.TabIndex = 5;
       this.chkAutoOpenLog.Text = "AutoOpenLog";
       this.chkAutoOpenLog.UseVisualStyleBackColor = true;
+      this.chkAutoOpenLog.CheckedChanged += new System.EventHandler(this.chkAutoOpenLog_CheckedChanged);
       // 
       // chkSuppressDupes
       // 
@@ -110,6 +114,7 @@
       this.chkSuppressDupes.TabIndex = 6;
       this.chkSuppressDupes.Text = "Suppress Duplicates";
       this.chkSuppressDupes.UseVisualStyleBackColor = true;
+      this.chkSuppressDupes.CheckedChanged += new System.EventHandler(this.chkSuppressDupes_CheckedChanged);
       // 
       // btnLogPath
       // 
@@ -136,12 +141,27 @@
       this.chkHTMLOut.TabIndex = 8;
       this.chkHTMLOut.Text = "HTML Output";
       this.chkHTMLOut.UseVisualStyleBackColor = true;
+      this.chkHTMLOut.CheckedChanged += new System.EventHandler(this.chkHTMLOut_CheckedChanged);
+      // 
+      // chkLogKeys
+      // 
+      this.chkLogKeys.AutoSize = true;
+      this.chkLogKeys.Checked = true;
+      this.chkLogKeys.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.chkLogKeys.Location = new System.Drawing.Point(592, 36);
+      this.chkLogKeys.Name = "chkLogKeys";
+      this.chkLogKeys.Size = new System.Drawing.Size(70, 17);
+      this.chkLogKeys.TabIndex = 9;
+      this.chkLogKeys.Text = "Log Keys";
+      this.chkLogKeys.UseVisualStyleBackColor = true;
+      this.chkLogKeys.CheckedChanged += new System.EventHandler(this.chkLogKeys_CheckedChanged);
       // 
       // OWLmain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(752, 88);
+      this.Controls.Add(this.chkLogKeys);
       this.Controls.Add(this.chkHTMLOut);
       this.Controls.Add(this.btnLogPath);
       this.Controls.Add(this.chkSuppressDupes);
@@ -174,6 +194,7 @@
     private System.Windows.Forms.Button btnLogPath;
     private System.Windows.Forms.SaveFileDialog saveFileDialog;
     private System.Windows.Forms.CheckBox chkHTMLOut;
+    private System.Windows.Forms.CheckBox chkLogKeys;
   }
 }
 
