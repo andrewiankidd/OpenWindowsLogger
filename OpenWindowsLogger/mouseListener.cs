@@ -61,7 +61,7 @@ class mouseListener
 
       //check if logging enabled and if so then write to log and console
       if (OpenWindowsLogger.OWLmain.logEnabled) {
-        OpenWindowsLogger.OWLmain.log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]/MOUSECLICK/ " + hookStruct.pt.x + ", " + hookStruct.pt.y);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "/CLICKED/" + hookStruct.pt.x + ", " + hookStruct.pt.y);
         Console.WriteLine("LOGGED: " + hookStruct.pt.x + ", " + hookStruct.pt.y);
       }
       //otherwise write to console only

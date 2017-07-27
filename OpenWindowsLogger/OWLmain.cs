@@ -21,14 +21,14 @@ namespace OpenWindowsLogger
     public static int timeoutLimit = 0;
     public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
     public static logger log;
-    private GlobalKeyboardHook _globalKeyboardHook;
-    KeysConverter kc = new KeysConverter();
+    private static GlobalKeyboardHook keyListener = new GlobalKeyboardHook();
+
 
     public OWLmain()
     {
       InitializeComponent();
       log = new logger();
-  }
+    }
 
     private void OWLmain_Load(object sender, EventArgs e)
     {
@@ -48,8 +48,8 @@ namespace OpenWindowsLogger
         mouseListener.mouseListenerMain();
       }).Start();
 
-      _globalKeyboardHook = new GlobalKeyboardHook();
-      _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+      //start keylogging
+      keyListener.keyListenerMain();
 
       if (timeoutLimit > 0)
       {
@@ -60,30 +60,6 @@ namespace OpenWindowsLogger
         timer.Start();
       }
 
-    }
-
-    private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
-    {
-      //Debug.WriteLine(e.KeyboardData.VirtualCode);
-
-      //if (e.KeyboardData.VirtualCode != GlobalKeyboardHook.VkSnapshot) return;
-
-      // seems, not needed in the life.
-      //if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.SysKeyDown &&
-      //    e.KeyboardData.Flags == GlobalKeyboardHook.LlkhfAltdown)
-      //{
-      //    MessageBox.Show("Alt + Print Screen");
-      //    e.Handled = true;
-      //}
-      //else
-
-      if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
-      {
-        string key = kc.ConvertToString(e.KeyboardData.VirtualCode);
-        //MessageBox.Show(key);
-        log.rwlog("w", "Pressed '" + key + "'");
-        e.Handled = true;
-      }
     }
 
     private void Timer_Elapsed(object sender, ElapsedEventArgs e)

