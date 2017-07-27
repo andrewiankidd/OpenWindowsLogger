@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-
 //CREDIT https://blogs.msdn.microsoft.com/toub/2006/05/03/low-level-mouse-hook-in-c/
 //Stephen Toub May 3 2006
 class mouseListener

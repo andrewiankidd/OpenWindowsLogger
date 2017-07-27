@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="keyListener.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="mouseListener.cs" />
     <Compile Include="OWLmain.cs">

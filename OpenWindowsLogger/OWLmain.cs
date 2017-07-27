@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Globalization;
 using System.Timers;
 
 namespace OpenWindowsLogger
@@ -22,6 +21,8 @@ namespace OpenWindowsLogger
     public static int timeoutLimit = 0;
     public static string logPath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + "output.txt";
     public static logger log;
+    private GlobalKeyboardHook _globalKeyboardHook;
+    KeysConverter kc = new KeysConverter();
 
     public OWLmain()
     {
@@ -47,20 +48,47 @@ namespace OpenWindowsLogger
         mouseListener.mouseListenerMain();
       }).Start();
 
+      _globalKeyboardHook = new GlobalKeyboardHook();
+      _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+
       if (timeoutLimit > 0)
       {
         System.Timers.Timer timer = new System.Timers.Timer(timeoutLimit * 1000);
         timer.Elapsed += Timer_Elapsed;
-        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + " Logging for " + timeoutLimit + " seconds.");
+        log.rwlog("w", "Logging for " + timeoutLimit + " seconds.");
         toggleLogging();
         timer.Start();
       }
 
     }
 
+    private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
+    {
+      //Debug.WriteLine(e.KeyboardData.VirtualCode);
+
+      //if (e.KeyboardData.VirtualCode != GlobalKeyboardHook.VkSnapshot) return;
+
+      // seems, not needed in the life.
+      //if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.SysKeyDown &&
+      //    e.KeyboardData.Flags == GlobalKeyboardHook.LlkhfAltdown)
+      //{
+      //    MessageBox.Show("Alt + Print Screen");
+      //    e.Handled = true;
+      //}
+      //else
+
+      if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+      {
+        string key = kc.ConvertToString(e.KeyboardData.VirtualCode);
+        //MessageBox.Show(key);
+        log.rwlog("w", "Pressed '" + key + "'");
+        e.Handled = true;
+      }
+    }
+
     private void Timer_Elapsed(object sender, ElapsedEventArgs e)
     {
-      log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + " Timer up!");
+      log.rwlog("w", "Timer up!");
       Application.Exit();
     }
 
@@ -96,7 +124,7 @@ namespace OpenWindowsLogger
               filteredWindows.Add(windowKey);
             }
 
-            log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + windowKey);
+            log.rwlog("w", windowKey);
           }
         }
         //check if logging is still enabled, if not then close off, if so then run logger again
@@ -137,7 +165,7 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Disabled";
         btnEnableLogging.ForeColor = Color.Red;
         //write to log that logging has been disabled, and the datetime it was disabled
-        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + btnEnableLogging.Text);
+        log.rwlog("w", btnEnableLogging.Text);
         //if user has chosen to automatically open the log file, open it in default text editor now
         if (chkAutoOpenLog.Checked) { System.Diagnostics.Process.Start(logPath); }
       }
@@ -148,7 +176,7 @@ namespace OpenWindowsLogger
         btnEnableLogging.Text = "Logging Enabled";
         btnEnableLogging.ForeColor = Color.Green;
         //write to log that logging has been enabled, and the datetime it was enabled
-        log.rwlog("w", "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "]" + btnEnableLogging.Text);
+        log.rwlog("w", btnEnableLogging.Text);
         logWindows();
       }
     }

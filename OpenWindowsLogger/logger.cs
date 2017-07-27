@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace OpenWindowsLogger
     {
       if (rw == "w")
       {
+        contents = "[" + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) + "] - " + contents;
         logFilew.WriteLine(contents);
         logFilew.Flush();
       }
