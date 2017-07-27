@@ -45,35 +45,27 @@ class mouseListener
 
   private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-  private static IntPtr HookCallback(
-
-      int nCode, IntPtr wParam, IntPtr lParam)
-
+  private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
   {
 
-    if (nCode >= 0 &&
-
-        MouseMessages.WM_LBUTTONDOWN == (MouseMessages)wParam)
-
+    if (nCode >= 0 && (MouseMessages.WM_LBUTTONDOWN == (MouseMessages)wParam || MouseMessages.WM_RBUTTONDOWN == (MouseMessages)wParam))
     {
-
       MSLLHOOKSTRUCT hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+
+      string mButton = MouseMessages.WM_LBUTTONDOWN == (MouseMessages)wParam ? "LEFT" : "RIGHT";
 
       //check if logging enabled and if so then write to log and console
       if (OpenWindowsLogger.OWLmain.logEnabled) {
-        OpenWindowsLogger.OWLmain.log.rwlog("w", "/CLICKED/" + hookStruct.pt.x + ", " + hookStruct.pt.y);
+        OpenWindowsLogger.OWLmain.log.rwlog("w", "/CLICKED/" + mButton + "/" + hookStruct.pt.x + ", " + hookStruct.pt.y);
         Console.WriteLine("LOGGED: " + hookStruct.pt.x + ", " + hookStruct.pt.y);
       }
-      //otherwise write to console only
       else
       {
         Console.WriteLine("NOTLOGGED: " + hookStruct.pt.x + ", " + hookStruct.pt.y);
       }
-
     }
 
     return CallNextHookEx(_hookID, nCode, wParam, lParam);
-
   }
 
   private const int WH_MOUSE_LL = 14;
