@@ -25,7 +25,7 @@ Monitor time between pressing button in application and new form opening;
 
 **Output:**
 
-![alt tag](http://i.imgur.com/aE8XYlc.png)
+![alt tag](http://i.imgur.com/8YNdJ1e.png)
 
 
 ## Credits
